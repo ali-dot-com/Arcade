@@ -1,2 +1,1 @@
-# Arcade-Store
-This is arcade store. Where you can purchase the best games
+This is the very cool website to buy new and old games

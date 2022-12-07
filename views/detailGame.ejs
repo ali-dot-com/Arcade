@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail | Game</title>
+</head>
+<body>
+    <h1>Name : <%= data[0]._name%></h1>
+    <h1>Price : <%= data[0].price%></h1>
+    <h1>Catagory : <%= data[0].catagory%></h1>
+    <h1>Detail : <%= data[0].detail%></h1>
+    <a href="/addtowishlist/<%= data[0].id %>">Add to Wishlist</a><br>
+    <a href="/addtocart/<%= data[0].id %>">Add to Cart</a>
+</body>
+</html>
