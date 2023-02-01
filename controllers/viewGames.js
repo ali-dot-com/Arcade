@@ -100,23 +100,16 @@ const details = (req,res) =>{
         }
         else {
             const id = req.params.id;
-            const url = "https://store.steampowered.com/api/appdetails?appids="+id;
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", url);
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                const id2 = req.params.id;
-                xhr.responseText = xhr.responseText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, '');
-                const gameData = JSON.parse(xhr.responseText);
-                // console.log(gameData);
-                // res.send(gameData[`${id}`]["data"]);
-                const steamData = gameData[`${id}`];
-                // res.send(steamData["data"]["reviews"])
-                res.render('gameDetails', {data: result, steam: steamData});
+            const q = `select * from comments where gameid = ${id}`;
+            connection.query(q, (err,reslt)=>{
+                if (err){
+                    res.send(err);
                 }
-            };
-            xhr.send();
+                else {
+                    res.render('usergamedetails', {data: result});
+                }
+
+            })
         }
     })
 }

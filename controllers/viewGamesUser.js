@@ -4,8 +4,8 @@ const app = express();
 const path = require ('path');
 const { parse } = require('path');
 const XMLHttpRequest = require('xhr2');
-const { json } = require('body-parser');
-const { isTypedArray, isKeyObject } = require('util/types');
+// const { json } = require('body-parser');
+// const { isTypedArray, isKeyObject } = require('util/types');
 
 const gamesPerPage = 6;
 
@@ -105,29 +105,33 @@ const details = (req,res) =>{
                 if (err){
                     res.send(err);
                 }
-                else{
-                    // console.log((reslt[0].comm));
-                    // console.log(typeof(reslt[0].comm));
-                    const url = "https://store.steampowered.com/api/appdetails?appids="+id;
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("GET", url);
-
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4) {
-                        const id2 = req.params.id;
-                        xhr.responseText = xhr.responseText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, '');
-                        const gameData = JSON.parse(xhr.responseText);
-                        const steamData = gameData[`${id}`];
-                        res.render('usergamedetails', {data: result, steam: steamData, com: reslt});
-                               
-                        }
-                    };
-                    xhr.send(); 
+                else {
+                    res.render('usergamedetails', {data: result});
                 }
+        //         else{
+        //             // console.log((reslt[0].comm));
+        //             // console.log(typeof(reslt[0].comm));
+        //             const url = "https://store.steampowered.com/api/appdetails?appids="+id;
+        //             var xhr = new XMLHttpRequest();
+        //             xhr.open("GET", url);
+
+        //             xhr.onreadystatechange = function () {
+        //                 if (xhr.readyState === 4) {
+        //                 const id2 = req.params.id;
+        //                 xhr.responseText = xhr.responseText.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, '');
+        //                 const gameData = JSON.parse(xhr.responseText);
+        //                 const steamData = gameData[`${id}`];
+        //                 res.render('usergamedetails', {data: result, steam: steamData, com: reslt});
+                               
+        //                 }
+        //             };
+        //             xhr.send(); 
+        //         }
             })
         }
     })
 }
+
 
 
 const comment = (req,res) => {
@@ -145,7 +149,6 @@ const comment = (req,res) => {
     })
 }
 
-
 //function to show the data
 function showData(result,res,req,search,totalGames,page,Catagory)
 {
@@ -157,5 +160,5 @@ function showData(result,res,req,search,totalGames,page,Catagory)
     });
 }
 
-module.exports = {comment, homePage,viewGames_pager,viewGviewGames_catagory_page,searchGame,details};
+module.exports = {comment, homePage,viewGames_pager,viewGviewGames_catagory_page,searchGame, details};
 
